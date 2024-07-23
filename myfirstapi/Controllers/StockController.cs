@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using myfirstapi.Data;
+using myfirstapi.Mappers;
 
-namespace myfirstapi.Data
+namespace myfirstapi.Controllers
 {
     [Route("api/stock")]
     [ApiController]
@@ -21,7 +23,8 @@ namespace myfirstapi.Data
        [HttpGet]
         public IActionResult getAll()
         {
-            var stocks=_context.Stocks.ToList();
+            var stocks=_context.Stocks.ToList()
+            .Select( s => s.ToStockDto());
 
              return Ok(stocks);
         }
@@ -34,8 +37,7 @@ namespace myfirstapi.Data
           if(stock==null){
             return NotFound();
           }
-
-          return Ok(stock);
+            return Ok(stock.ToStockDto());
         }
     }
 }
