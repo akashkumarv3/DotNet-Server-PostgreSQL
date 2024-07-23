@@ -103,3 +103,4 @@
 /home/akashkumar/DotNetProject/MyWebAPI/myfirstapi/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.resources.dll
 /home/akashkumar/DotNetProject/MyWebAPI/myfirstapi/bin/Debug/net8.0/Npgsql.dll
 /home/akashkumar/DotNetProject/MyWebAPI/myfirstapi/bin/Debug/net8.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll
+/home/akashkumar/DotNetProject/MyWebAPI/myfirstapi/obj/Debug/net8.0/myfirstapi.sourcelink.json
