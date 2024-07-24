@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using myfirstapi.Data;
 using myfirstapi.Dtos.Stock;
 using myfirstapi.Mappers;
+using myfirstapi.Models;
 
 namespace myfirstapi.Controllers
 {
@@ -49,6 +51,27 @@ namespace myfirstapi.Controllers
                    _context.Stocks.Add(stockModel);
                    _context.SaveChanges();
                    return CreatedAtAction(nameof(getById),new{stockModel.Id},stockModel.ToStockDto());
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        public IActionResult Update([FromRoute] int id,[FromBody] UpdateStocRequestDto updateStockDto)
+        {
+            var stockModel = _context.Stocks.FirstOrDefault(x => x.Id == id);
+                  if(stockModel==null){
+                      return NotFound();
+                  }
+               stockModel.Symbol=updateStockDto.Symbol;
+               stockModel.CompanyName=updateStockDto.CompanyName;
+               stockModel.Purchase=updateStockDto.Purchase;
+               stockModel.Indunstry=updateStockDto.Indunstry;
+               stockModel.LastDiv=updateStockDto.LastDiv;
+               stockModel.MarketCap=updateStockDto.MarketCap;
+
+              //now save the stockModel chnages to db
+              _context.SaveChanges();
+
+              return  Ok(stockModel.ToStockDto());    
         }
     }
 }
