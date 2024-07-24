@@ -42,9 +42,9 @@ namespace myfirstapi.Repository
                 return stockModel;
         }
 
-        public Task<List<Stock>> GetAllAsync()
+        public async Task<List<Stock>> GetAllAsync()
         {
-            return _context.Stocks.ToListAsync();
+            return await _context.Stocks.ToListAsync();
         }
 
         public async Task<Stock?> getByIdAsync(int id)
