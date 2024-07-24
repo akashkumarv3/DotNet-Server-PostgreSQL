@@ -53,9 +53,8 @@ namespace myfirstapi.Controllers
         public async Task<ActionResult> Create([FromBody] CreateStockRequest createStockDto)
         {
                     var stockModel=createStockDto.ToStockFromCreateDto();
-                    
-                   await _context.Stocks.AddAsync(stockModel);
-                  await _context.SaveChangesAsync();
+                    await _stockrepo.CreateAsync(stockModel);
+                  
                    return CreatedAtAction(nameof(getById),new{stockModel.Id},stockModel.ToStockDto());
         }
 
@@ -63,19 +62,10 @@ namespace myfirstapi.Controllers
         [Route("{id}")]
         public async Task<IActionResult> Update([FromRoute] int id,[FromBody] UpdateStocRequestDto updateStockDto)
         {
-            var stockModel =await _context.Stocks.FirstOrDefaultAsync(x => x.Id == id);
-                  if(stockModel==null){
-                      return NotFound();
-                  }
-               stockModel.Symbol=updateStockDto.Symbol;
-               stockModel.CompanyName=updateStockDto.CompanyName;
-               stockModel.Purchase=updateStockDto.Purchase;
-               stockModel.Indunstry=updateStockDto.Indunstry;
-               stockModel.LastDiv=updateStockDto.LastDiv;
-               stockModel.MarketCap=updateStockDto.MarketCap;
-
-              //now save the stockModel chnages to db
-             await _context.SaveChangesAsync();
+           var stockModel=await _stockrepo.UpdateAsync(id,updateStockDto);
+           if(stockModel==null){
+               return NotFound();
+           }
 
               return  Ok(stockModel.ToStockDto());    
         }
@@ -85,15 +75,10 @@ namespace myfirstapi.Controllers
         [Route("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            var stockModel = await _context.Stocks.FirstOrDefaultAsync(x => x.Id == id);
+            var stockModel = await _stockrepo.DeleteAsync(id);
                   if(stockModel==null){
                       return NotFound();
                   }
-               
-
-              //now delete the stockModel from db
-               _context.Remove(stockModel);
-              await _context.SaveChangesAsync();
 
               return Ok(new { Message = "Item successfully deleted." });
         }
