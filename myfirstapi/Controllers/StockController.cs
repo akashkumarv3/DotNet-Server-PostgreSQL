@@ -73,5 +73,23 @@ namespace myfirstapi.Controllers
 
               return  Ok(stockModel.ToStockDto());    
         }
+
+        //delete the specific Stock details from db
+         [HttpDelete]
+        [Route("{id}")]
+        public IActionResult Delete([FromRoute] int id)
+        {
+            var stockModel = _context.Stocks.FirstOrDefault(x => x.Id == id);
+                  if(stockModel==null){
+                      return NotFound();
+                  }
+               
+
+              //now delete the stockModel from db
+              _context.Remove(stockModel);
+              _context.SaveChanges();
+
+              return Ok(new { Message = "Item successfully deleted." });
+        }
     }
 }
