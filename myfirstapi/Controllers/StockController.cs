@@ -7,8 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using myfirstapi.Data;
 using myfirstapi.Dtos.Stock;
+using myfirstapi.Interfaces;
 using myfirstapi.Mappers;
 using myfirstapi.Models;
+using myfirstapi.Repository;
 
 namespace myfirstapi.Controllers
 {
@@ -19,15 +21,17 @@ namespace myfirstapi.Controllers
 
 
          private readonly ApplicationDBContex  _context;
-        public StockController(ApplicationDBContex contex)
+         private readonly IStockRepository _stockrepo;
+        public StockController(ApplicationDBContex contex,IStockRepository stockRepo)
         {
             _context=contex;
+            _stockrepo=stockRepo;
         }
 
        [HttpGet]
         public async Task<IActionResult > getAll()
         {
-            var stocks=await _context.Stocks.ToListAsync();
+            var stocks=await _stockrepo.GetAllAsync();
 
             var stockList=stocks.Select( s => s.ToStockDto());
 

@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using myfirstapi.Data;
+using myfirstapi.Interfaces;
+using myfirstapi.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +17,8 @@ builder.Services.AddDbContext<ApplicationDBContex>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
+
+builder.Services.AddScoped<IStockRepository, StockRepository>();
 
 var app = builder.Build();
 
