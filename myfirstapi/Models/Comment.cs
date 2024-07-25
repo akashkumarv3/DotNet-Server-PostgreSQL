@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace myfirstapi.Models
@@ -16,7 +17,8 @@ namespace myfirstapi.Models
 
         public DateTime CreatedOn { get; set; }=DateTime.Now;
         public int? StockId { get; set; }
-
+        
+        [JsonIgnore]
         public Stock? Stock { get; set; }
     }
 }

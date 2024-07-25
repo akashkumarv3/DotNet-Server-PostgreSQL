@@ -32,5 +32,17 @@ namespace myfirstapi.Controllers
 
            return Ok(commentsList);
         }
+
+        //getById
+          [HttpGet("{id}")]
+        public async Task<IActionResult> GetById([FromRoute] int id)
+        {
+           var comment= await _commentRepo.GetById(id);
+           if(comment==null){
+               return NotFound();
+           }
+     var formagtedDTo=comment.ToCommentDto();
+           return Ok(formagtedDTo);
+        }
     }
 }

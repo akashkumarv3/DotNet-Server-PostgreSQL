@@ -20,8 +20,9 @@ namespace myfirstapi.Mappers
              Purchase=stockModel.Purchase,
              LastDiv=stockModel.LastDiv,
              Indunstry=stockModel.Indunstry,
-             MarketCap=stockModel.MarketCap
-
+             MarketCap=stockModel.MarketCap,
+             Comments=stockModel.Comments.Select(c=> c.ToCommentDto()).ToList()
+            
           };
         }
 

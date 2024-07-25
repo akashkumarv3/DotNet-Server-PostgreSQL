@@ -41,7 +41,7 @@ namespace myfirstapi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> getById( [FromRoute] int id)
         {
-          var stock=await _context.Stocks.FindAsync(id);
+          var stock=await _stockrepo.getByIdAsync(id);
 
           if(stock==null){
             return NotFound();
