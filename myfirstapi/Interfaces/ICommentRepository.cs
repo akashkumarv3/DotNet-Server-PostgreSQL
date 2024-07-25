@@ -8,6 +8,7 @@ namespace myfirstapi.Interfaces
 {
     public interface ICommentRepository
     {
+        Task<Comment> CreateAsync(Comment comment);
         Task<List<Comment>> GetAllSync();
         Task<Comment?> GetById(int id);
     }

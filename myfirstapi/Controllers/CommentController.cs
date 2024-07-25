@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using myfirstapi.Dtos.Comment;
 using myfirstapi.Interfaces;
 using myfirstapi.Mappers;
 using myfirstapi.Models;
@@ -19,9 +20,13 @@ namespace myfirstapi.Controllers
 
 
         private readonly ICommentRepository _commentRepo;
-        public CommentController(ICommentRepository commentRepo)
+         
+        private readonly IStockRepository _stockRepo;
+
+        public CommentController(ICommentRepository commentRepo, IStockRepository stockRepo)
         {
             _commentRepo=commentRepo;
+            _stockRepo=stockRepo;
         }
 
         [HttpGet]
@@ -44,5 +49,19 @@ namespace myfirstapi.Controllers
      var formagtedDTo=comment.ToCommentDto();
            return Ok(formagtedDTo);
         }
+
+        //create new comments for existing Stock
+        [HttpPost("{stockId}")]
+        public async Task<IActionResult> Create([FromRoute] int stockId, [FromBody] CreateCommentDto commentDto)
+        {
+              if(! await  _stockRepo.StockExists(stockId)){
+                return BadRequest("Stock does not exist");
+              }
+
+              var commentModel=commentDto.ToCommentFromCreate(stockId);
+              await _commentRepo.CreateAsync(commentModel);
+
+              return  CreatedAtAction(nameof(GetById),new{id=commentModel},commentModel.ToCommentDto());
+        }
+        }
     }
-}

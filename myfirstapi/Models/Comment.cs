@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace myfirstapi.Models
 {
-    public class Comment
+    public class  Comment
     {
 
         public int Id { get; set; }
@@ -15,10 +15,9 @@ namespace myfirstapi.Models
 
         public string Content { get; set; }=string.Empty;
 
-        public DateTime CreatedOn { get; set; }=DateTime.Now;
+        public DateTime CreatedOn { get; set; }=DateTime.UtcNow;
         public int? StockId { get; set; }
         
-        [JsonIgnore]
         public Stock? Stock { get; set; }
     }
 }

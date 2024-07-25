@@ -1,3 +1,11 @@
+/home/akashkumar/DotNetProject/MyWebAPI/myfirstapi/obj/Debug/net8.0/myfirstapi.csproj.AssemblyReference.cache
+/home/akashkumar/DotNetProject/MyWebAPI/myfirstapi/obj/Debug/net8.0/myfirstapi.GeneratedMSBuildEditorConfig.editorconfig
+/home/akashkumar/DotNetProject/MyWebAPI/myfirstapi/obj/Debug/net8.0/myfirstapi.AssemblyInfoInputs.cache
+/home/akashkumar/DotNetProject/MyWebAPI/myfirstapi/obj/Debug/net8.0/myfirstapi.AssemblyInfo.cs
+/home/akashkumar/DotNetProject/MyWebAPI/myfirstapi/obj/Debug/net8.0/myfirstapi.csproj.CoreCompileInputs.cache
+/home/akashkumar/DotNetProject/MyWebAPI/myfirstapi/obj/Debug/net8.0/myfirstapi.MvcApplicationPartsAssemblyInfo.cs
+/home/akashkumar/DotNetProject/MyWebAPI/myfirstapi/obj/Debug/net8.0/myfirstapi.MvcApplicationPartsAssemblyInfo.cache
+/home/akashkumar/DotNetProject/MyWebAPI/myfirstapi/obj/Debug/net8.0/myfirstapi.sourcelink.json
 /home/akashkumar/DotNetProject/MyWebAPI/myfirstapi/bin/Debug/net8.0/appsettings.Development.json
 /home/akashkumar/DotNetProject/MyWebAPI/myfirstapi/bin/Debug/net8.0/appsettings.json
 /home/akashkumar/DotNetProject/MyWebAPI/myfirstapi/bin/Debug/net8.0/myfirstapi
@@ -82,14 +90,6 @@
 /home/akashkumar/DotNetProject/MyWebAPI/myfirstapi/bin/Debug/net8.0/tr/Microsoft.CodeAnalysis.Workspaces.resources.dll
 /home/akashkumar/DotNetProject/MyWebAPI/myfirstapi/bin/Debug/net8.0/zh-Hans/Microsoft.CodeAnalysis.Workspaces.resources.dll
 /home/akashkumar/DotNetProject/MyWebAPI/myfirstapi/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.resources.dll
-/home/akashkumar/DotNetProject/MyWebAPI/myfirstapi/obj/Debug/net8.0/myfirstapi.csproj.AssemblyReference.cache
-/home/akashkumar/DotNetProject/MyWebAPI/myfirstapi/obj/Debug/net8.0/myfirstapi.GeneratedMSBuildEditorConfig.editorconfig
-/home/akashkumar/DotNetProject/MyWebAPI/myfirstapi/obj/Debug/net8.0/myfirstapi.AssemblyInfoInputs.cache
-/home/akashkumar/DotNetProject/MyWebAPI/myfirstapi/obj/Debug/net8.0/myfirstapi.AssemblyInfo.cs
-/home/akashkumar/DotNetProject/MyWebAPI/myfirstapi/obj/Debug/net8.0/myfirstapi.csproj.CoreCompileInputs.cache
-/home/akashkumar/DotNetProject/MyWebAPI/myfirstapi/obj/Debug/net8.0/myfirstapi.MvcApplicationPartsAssemblyInfo.cs
-/home/akashkumar/DotNetProject/MyWebAPI/myfirstapi/obj/Debug/net8.0/myfirstapi.MvcApplicationPartsAssemblyInfo.cache
-/home/akashkumar/DotNetProject/MyWebAPI/myfirstapi/obj/Debug/net8.0/myfirstapi.sourcelink.json
 /home/akashkumar/DotNetProject/MyWebAPI/myfirstapi/obj/Debug/net8.0/staticwebassets.build.json
 /home/akashkumar/DotNetProject/MyWebAPI/myfirstapi/obj/Debug/net8.0/staticwebassets.development.json
 /home/akashkumar/DotNetProject/MyWebAPI/myfirstapi/obj/Debug/net8.0/staticwebassets/msbuild.myfirstapi.Microsoft.AspNetCore.StaticWebAssets.props

@@ -15,7 +15,6 @@ namespace myfirstapi.Interfaces
         Task<Stock> CreateAsync(Stock stock);
         Task<Stock?> UpdateAsync(int id,UpdateStocRequestDto updateStocDto);
         Task<Stock?> DeleteAsync(int id);
-
-
+        Task<bool> StockExists(int? stockId);
     }
 }

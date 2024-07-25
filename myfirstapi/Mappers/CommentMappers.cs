@@ -7,19 +7,29 @@ using myfirstapi.Models;
 
 namespace myfirstapi.Mappers
 {
-    public static class CommentMappers
+  public static class CommentMappers
+  {
+    public static CommentDto ToCommentDto(this Comment commnetModel)
     {
-         public static CommentDto ToCommentDto( this Comment commnetModel)
-        {
-          return new CommentDto
-          {
-             Id=commnetModel.Id,
-             Content=commnetModel.Content,
-             CreatedOn=commnetModel.CreatedOn,
-             Title=commnetModel.Title,
-             StockId=commnetModel.StockId
-          };
-        }
-
+      return new CommentDto
+      {
+        Id = commnetModel.Id,
+        Content = commnetModel.Content,
+        CreatedOn = commnetModel.CreatedOn,
+        Title = commnetModel.Title,
+        StockId = commnetModel.StockId
+      };
     }
+
+
+    public static Comment ToCommentFromCreate(this CreateCommentDto commnetModel,int stockId)
+    {
+      return new Comment
+      {
+        Content = commnetModel.Content,
+        Title = commnetModel.Title,
+        StockId = stockId
+      };
+    }
+  }
 }
