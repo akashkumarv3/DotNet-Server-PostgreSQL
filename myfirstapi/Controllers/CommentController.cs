@@ -54,14 +54,15 @@ namespace myfirstapi.Controllers
         [HttpPost("{stockId}")]
         public async Task<IActionResult> Create([FromRoute] int stockId, [FromBody] CreateCommentDto commentDto)
         {
-              if(! await  _stockRepo.StockExists(stockId)){
+              if(! await  _stockRepo.StockExists(stockId))
+              {
                 return BadRequest("Stock does not exist");
               }
 
               var commentModel=commentDto.ToCommentFromCreate(stockId);
               await _commentRepo.CreateAsync(commentModel);
 
-              return  CreatedAtAction(nameof(GetById),new{id=commentModel},commentModel.ToCommentDto());
+              return  CreatedAtAction(nameof(GetById),new{id=commentModel.Id},commentModel.ToCommentDto());
         }
         }
     }
