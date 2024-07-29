@@ -64,5 +64,21 @@ namespace myfirstapi.Controllers
 
               return  CreatedAtAction(nameof(GetById),new{id=commentModel.Id},commentModel.ToCommentDto());
         }
+       
+         //update existing comment 
+         [HttpPut]
+         [Route("{id}")]
+        public async Task<IActionResult> Update([FromRoute] int id ,[FromBody] UpdateCommentRequestDto commentRequestDto)
+        {
+         
+            var comment=await _commentRepo.UpdateAsync(id,commentRequestDto.ToCommentFromUpdate());
+            
+            if(comment==null)
+            {
+              return NotFound("Comment does not found");
+            }
+           
+           return Ok(comment.ToCommentDto());
+        }
         }
     }

@@ -31,5 +31,14 @@ namespace myfirstapi.Mappers
         StockId = stockId
       };
     }
+
+    public static Comment ToCommentFromUpdate(this UpdateCommentRequestDto commnetModel)
+    {
+      return new Comment
+      {
+        Content = commnetModel.Content,
+        Title = commnetModel.Title
+      };
+    }
   }
 }

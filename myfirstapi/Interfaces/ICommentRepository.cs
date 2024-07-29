@@ -11,5 +11,6 @@ namespace myfirstapi.Interfaces
         Task<Comment> CreateAsync(Comment comment);
         Task<List<Comment>> GetAllSync();
         Task<Comment?> GetById(int id);
+        Task <Comment?> UpdateAsync(int id, Comment comment);
     }
 }
