@@ -53,8 +53,8 @@ namespace myfirstapi.Repository
               return null;
             }
 
-            existingComment.Content=commentModel.Title;
-            existingComment.Title=existingComment.Title;
+            existingComment.Content=commentModel.Content;
+            existingComment.Title=commentModel.Title;
 
             await _context.SaveChangesAsync();
 
