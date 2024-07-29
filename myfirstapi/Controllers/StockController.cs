@@ -16,71 +16,83 @@ namespace myfirstapi.Controllers
 {
     [Route("api/stock")]
     [ApiController]
-    public class StockController :ControllerBase
+    public class StockController : ControllerBase
     {
 
 
-         private readonly ApplicationDBContex  _context;
-         private readonly IStockRepository _stockrepo;
-        public StockController(ApplicationDBContex contex,IStockRepository stockRepo)
+        private readonly ApplicationDBContex _context;
+        private readonly IStockRepository _stockrepo;
+        public StockController(ApplicationDBContex contex, IStockRepository stockRepo)
         {
-            _context=contex;
-            _stockrepo=stockRepo;
+            _context = contex;
+            _stockrepo = stockRepo;
         }
 
-       [HttpGet]
-        public async Task<IActionResult > getAll()
+        [HttpGet]
+        public async Task<IActionResult> getAll()
         {
-            var stocks=await _stockrepo.GetAllAsync();
+            var stocks = await _stockrepo.GetAllAsync();
 
-            var stockList=stocks.Select( s => s.ToStockDto());
+            var stockList = stocks.Select(s => s.ToStockDto());
 
-             return Ok(stockList);
+            return Ok(stockList);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> getById( [FromRoute] int id)
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> getById([FromRoute] int id)
         {
-          var stock=await _stockrepo.getByIdAsync(id);
+            var stock = await _stockrepo.getByIdAsync(id);
 
-          if(stock==null){
-            return NotFound();
-          }
+            if (stock == null)
+            {
+                return NotFound();
+            }
             return Ok(stock.ToStockDto());
         }
 
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] CreateStockRequest createStockDto)
         {
-                    var stockModel=createStockDto.ToStockFromCreateDto();
-                    await _stockrepo.CreateAsync(stockModel);
-                  
-                   return CreatedAtAction(nameof(getById),new{stockModel.Id},stockModel.ToStockDto());
+            //here we adding validation in contriller API for globalyy 
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var stockModel = createStockDto.ToStockFromCreateDto();
+            await _stockrepo.CreateAsync(stockModel);
+
+            return CreatedAtAction(nameof(getById), new { stockModel.Id }, stockModel.ToStockDto());
         }
 
         [HttpPut]
-        [Route("{id}")]
-        public async Task<IActionResult> Update([FromRoute] int id,[FromBody] UpdateStocRequestDto updateStockDto)
+        [Route("{id:int}")]
+        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateStocRequestDto updateStockDto)
         {
-           var stockModel=await _stockrepo.UpdateAsync(id,updateStockDto);
-           if(stockModel==null){
-               return NotFound();
-           }
 
-              return  Ok(stockModel.ToStockDto());    
+            //here we adding validation in contriller API for globalyy 
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+                
+            var stockModel = await _stockrepo.UpdateAsync(id, updateStockDto);
+            if (stockModel == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(stockModel.ToStockDto());
         }
 
         //delete the specific Stock details from db
-         [HttpDelete]
-        [Route("{id}")]
+        [HttpDelete]
+        [Route("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             var stockModel = await _stockrepo.DeleteAsync(id);
-                  if(stockModel==null){
-                      return NotFound();
-                  }
+            if (stockModel == null)
+            {
+                return NotFound();
+            }
 
-              return Ok(new { Message = "Item successfully deleted." });
+            return Ok(new { Message = "Item successfully deleted." });
         }
     }
 }
