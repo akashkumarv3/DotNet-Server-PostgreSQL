@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using myfirstapi.Data;
 using myfirstapi.Dtos.Stock;
+using myfirstapi.Helpers;
 using myfirstapi.Interfaces;
 using myfirstapi.Mappers;
 using myfirstapi.Models;
@@ -29,9 +30,9 @@ namespace myfirstapi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> getAll()
+        public async Task<IActionResult> getAll([FromQuery] QueryObject query)
         {
-            var stocks = await _stockrepo.GetAllAsync();
+            var stocks = await _stockrepo.GetAllAsync(query);
 
             var stockList = stocks.Select(s => s.ToStockDto());
 
@@ -92,7 +93,7 @@ namespace myfirstapi.Controllers
                 return NotFound();
             }
 
-            return Ok(new { Message = "Item successfully deleted." });
+            return Ok(new { Message = "Stocks successfully deleted." });
         }
     }
 }
