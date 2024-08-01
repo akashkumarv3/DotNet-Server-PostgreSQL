@@ -1,6 +1,12 @@
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using myfirstapi.Data;
 using myfirstapi.Interfaces;
+using myfirstapi.Models;
 using myfirstapi.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +23,40 @@ builder.Services.AddDbContext<ApplicationDBContex>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
+builder.Services.AddIdentity<AppUser,IdentityRole>(Options =>
+{
+    Options.Password.RequireDigit=true;
+    Options.Password.RequireLowercase=true;
+    Options.Password.RequireUppercase=true;
+    Options.Password.RequireNonAlphanumeric=true;
+    Options.Password.RequiredLength=12;
+}
+).AddEntityFrameworkStores<ApplicationDBContex>();
+
+builder.Services.AddAuthentication(Options => 
+{
+    Options.DefaultAuthenticateScheme=
+    Options.DefaultChallengeScheme=
+    Options.DefaultForbidScheme=
+    Options.DefaultScheme=
+    Options.DefaultSignInScheme=
+    Options.DefaultSignOutScheme=JwtBearerDefaults.AuthenticationScheme;
+}
+
+).AddJwtBearer( options =>
+{
+    options.TokenValidationParameters=new TokenValidationParameters
+    {
+        ValidateIssuer=true,
+        ValidIssuer=builder.Configuration["JWT:Issuer"],
+        ValidateAudience=true,
+        ValidAudience=builder.Configuration["JWT:Audience"],
+        ValidateIssuerSigningKey=true,
+        IssuerSigningKey=new SymmetricSecurityKey(
+            System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:SigningKey"])
+        )
+    };
+});
 
 builder.Services.AddScoped<IStockRepository, StockRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
@@ -31,6 +71,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseAuthentication();
+app.UseAuthentication();
 
 app.MapControllers();
 
